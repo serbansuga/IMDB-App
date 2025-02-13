@@ -1,0 +1,66 @@
+-Am implementat clasa Production si subclasele acesteia. Clasa Production detaliaza si contine
+informatiile despre toate productiile continute de aplicatia noastra IMDB. Aceasta contine
+numele productiei, recenziile pentru o anumita productie, anul lansarii, actorii participanti
+etc. Clasa mosteneste, de asemenea, doua subclase(Movie si Series) care sunt tipuri mai exacte
+de productii, film sau serial. In clasa IMDB obiectele au fost create folosind constructorii
+celor 2 clase Movie si Series.
+
+-Apoi clasa User si subclasele(Admin, Contributor si Regular). Clasa abstracta User mosteneste
+toate cele 3 clase ce reprezinta tipuri de useri din sistem si contine informatiile pentru
+fiecare user(clasa Information). Fiecare clasa care reprezinta un tip de user contine metodele
+care implementeaza operatiile pe care user-ul respectiv are voie sa le faca: addRating, delete
+User, add Production, add Request etc(vor fi folosite ulterior la interfata).
+
+-Urmatoarele clase implementate au fost cele legate de cereri, RequestHolder si Request. Clasa
+request contine toate informatiile pentru o cerere care poate fi depusa, creata de un user:
+tipul cererii, username-ul userului care trebuie sa o rezolve, descrierea cererii etc. Clasa
+RequestHolder retine o lista de cereri care vor fi rezolvate doar de admini, utilizatorii
+privilegiati.
+
+-Iar la final am implementat si clasa Actor impreuna cu toate informatiile sale legate de
+actori: numele actorilor din sistem, productiile la care au participat si biografia lor.
+
+In paralel cu implementarea claselor am realizat si parsarea fisierelor JSON din care
+am luat toate datele de intrare necesare aplicatiei. Parsarea fisierelor JSON am realizat-o
+in clasa IMDB, clasa principala a aplicatiei, in functia run. Odata ce am implementat
+fiecare clasa principala precum Production,User,Request si toate subclasele lor, am realizat
+pe parcurs parsarea fisierelor pentru productii, accounts, cereri si actori.
+Fisierele au fost parsate folosind obiecte de tip JSONParser si JSONObject.
+De asemenea, in clasa IMDB sunt retinute listele ce contin filmele, actorii, cererile si
+userii din sistem. Asupra lor se vor realiza toate operatiile din aplicatie(stergere user,
+adaugare cerere etc.).
+
+In continuare, am realizat sabloanele de proiectare. Sablonul singletton l-am folosit pentru
+a crea o instanta a clasei IDMB pe care o voi folosi pe tot parcurul aplicatiei deoarece se
+retine in cadrul acesteia si userul conectat la momentul curent in aplicatie. Sablonul builder
+l-am folosit pentru a usura crearea clasei Information care contine informatiile userului.
+Cu ajutorul sablonului Factory am realizat crearea userilor in functie de tipul acestora, fara
+a mai apela de fiecare data constructorii in functie de tipul userului.
+Cu ajutorul sablonului Observer am trimis notificari observatorilor(userilor) de fiecare data
+cand acestia primeau cereri de rezolvat sau ratinguri la productiile la care s-au implicat.
+In final, cu ajutorul sablonului strategy am actualizat de fiecare data experienta userului
+atunci cand acesta face o actiune descrisa in enunt.
+
+Interfata grafica:
+
+Pentru interfata grafica am folosit mediul Swing si toate functionalitatile acestuia: Butoane,
+labeluri, liste, JMenu pentru a afisa optiunile pe care un user le are, etc.
+
+-Interfata grafica incepe prin afisarea utilizatorului a unei pagini de Login, in care acesta
+fie introduce credentialele pana reuseste sa sa autentifice in cont, fie iese din aplicatie.
+Cand logarea s-a realizat cu succes, in clasa IMDB se retine userul curent conectat in aplicatie,
+iar toate operatiile se vor face in concordanta cu tipul acestuia.
+
+-Odata intrat in cont, se deschide pagina principala. In pagina principala, acestuia i sunt
+oferite niste recomandari de filme si seriale alaturi de poze cu acestea(Am adaugat imagini
+pentru toate productiile si actorii din sistem). De asemenea, acesta poate cauta orice actor
+sau film aflat in sistem in Search Bar, poate filtra filmele in functie de gen si de numarul
+de recenzii ale acestora, se poate deloga si poate accesa pagina de meniu.
+
+-In pagina de meniu, userului ii sunt afisate toate operatiile pe care acesta le poate face
+in functia de tipul de user pe care il are. Cu ajutorul mai multor paneluri(clase care extind clasa Jpanel)
+am realizat toate operatiile. De fiecare data cand un user alege din meniu o anumita operatie,
+acestuia i este afisat in fereastra de meniu panelul corespunzator cu operatia(fie ca vrea sa
+vada toate productiile din sistem, sa adauge un actor, o recenzie etc.). Userul se poate deloga
+sau poate reveni la pagina principala din meniu. Astfel, acesta poate naviga prin toate paginile
+odata intrat in cont. La apasarea butonului Exit din pagina de logare, aplicatia se inchide.
